@@ -20,7 +20,9 @@ def driver():
 def login(driver):
     driver.delete_all_cookies()
     driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx')
-    with open('/Users/potato/PycharmProjects/mywork/webwork/data/logincookies.yaml', 'r') as f:
+
+
+    with open('/Users/potato/PycharmProjects/mywork/data/logincookies.yaml', 'r') as f:
         cookies = yaml.load(f)
         print(cookies)
 
@@ -28,9 +30,10 @@ def login(driver):
         if 'expiry' in cookie:
             del cookie['expiry']
         driver.add_cookie(cookie)
-   ## driver.refresh()
+        ## driver.refresh()
     driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx')
 
     from webwork.page.mainpage import MainPage
+
     driver.implicitly_wait(10)
-    ##return MainPage(driver)
+    return MainPage(driver)
