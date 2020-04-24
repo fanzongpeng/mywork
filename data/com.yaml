@@ -1,0 +1,16 @@
+add_member:
+  - locla: username
+    by: id
+    action: sendKeys
+    text: $var1
+  - locla: memberAdd_acctid
+    by: id
+    action: sendKeys
+    text: $var2
+  - locla: memberAdd_mail
+    by: id
+    action: sendKeys
+    text: $var3
+  - locla: //*[@id="js_contacts36"]
+    by: xpath
+    action: click

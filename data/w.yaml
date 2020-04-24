@@ -1,0 +1,16 @@
+add_member:
+- action: sendKeys
+  by: id
+  locla: username
+  text: $var1
+- action: sendKeys
+  by: id
+  locla: memberAdd_acctid
+  text: $var2
+- action: sendKeys
+  by: id
+  locla: memberAdd_mail
+  text: $var3
+- action: click
+  by: css se
+  locla: .js_member_editor_form > div:nth-child(3)>.js_btn_save
