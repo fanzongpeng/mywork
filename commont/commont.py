@@ -2,6 +2,7 @@ import csv
 import os
 from unittest.mock import ANY
 
+import pymysql as pymysql
 import xlrd as xlrd
 import xlwt as xlwt
 import yaml
@@ -206,6 +207,17 @@ class Commont():
                     api_info_list.append(api_data)
         return api_info_list
 
+    def get_excel_data(self, case_path, sheetname, casename):
+        book = xlrd.open_workbook(case_path)
+        sheet = book.sheet_by_name(sheetname)
+        print(sheet.nrows)
+        case = []
+        for i in range(0, sheet.nrows):
+            if sheet.row_values(i)[1] == casename:
+                case.append(tuple(sheet.row_values(i)))
+        logger.debug("{}读取的数据列表为{}:".format(casename, case))
+        return case
+
     def read_txt(self, filepath):
         with open(filepath, 'r') as f:
             data = f.read()
@@ -215,3 +227,57 @@ class Commont():
         with open(filepath, 'r') as f:
             data = csv.reader(f)
         return data
+
+    #####跳板机链接数据库
+    def mysql_ssh(self):
+        '''
+        跳板机的SSH配置信息，192.168.0.1为服务器IP地址，ssh_username为用户名，ssh_pkey为本机私钥存放位置
+        ，remote_bind_address为跳板机地址，user为mysql连接用户名，passport为密码，db就是连接的数据库名了
+        '''
+
+        from sshtunnel import SSHTunnelForwarder
+        with SSHTunnelForwarder(
+                ('192.168.0.1', 22),
+                ssh_username="test",
+                ssh_pkey="test.pem",
+                remote_bind_address=('数据库链接地址', 3306)
+        ) as tunnel:
+            # 数据库连接配置，host默认127.0.0.1不用修改
+            conn = pymysql.connect(
+                host='127.0.0.1',
+                port=tunnel.local_bind_port,
+                user='root',
+                password='root',
+                db='test',
+                charset='utf8',
+                cursorclass=pymysql.cursors.DictCursor
+            )
+            # 获取游标
+            cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+            # 查询数据库，查询一条数据，其他CURD操作类似
+            sql = "SELECT name FROM table_name WHERE id = '%s'"
+            prams = ('1',)
+            cursor.execute(sql % prams)
+            info = cursor.fetchone()
+            print(info)
+            # 关闭连接
+            cursor.close()
+            conn.close()
+
+    def mysql(self):
+        db = pymysql.connect("localhost", "testuser", "test123", "TESTDB", charset='utf8')
+
+        # 使用cursor()方法获取操作游标
+        cursor = db.cursor()
+
+        # 使用execute方法执行SQL语句
+        cursor.execute("SELECT VERSION()")
+
+        # 使用 fetchone() 方法获取一条数据
+        data = cursor.fetchone()
+
+        print
+        "Database version : %s " % data
+
+        # 关闭数据库连接
+        db.close()

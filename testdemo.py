@@ -190,4 +190,5 @@ class TestDemo(Commont):
 
     def test_excel(self):
         b = self.file_path('data/cases.xlsx')
-        self.read_excel(b, '用例')
+        c = self.get_excel_data(b,'用例','登陆')
+        print(c)
