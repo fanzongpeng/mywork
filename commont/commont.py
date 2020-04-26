@@ -281,3 +281,26 @@ class Commont():
 
         # 关闭数据库连接
         db.close()
+
+    list = []  ##各种弹窗放到列表里
+
+    def handleralert(self):
+        for value in list:
+            if len(self.driver.find_elements(value)) > 0:
+                self.driver.find_element(value).click()
+
+    def findelement(self, by, value):
+        try:
+            return self.driver.find_element(by, value)
+        except:
+            i = 1
+            if i > 2:
+                return self.driver.find_element(by, value)
+            print("进入弹窗处理")
+            ##handleAlert();
+
+            self.handleralert()
+            i = i + 1
+            return self.findelement(by, value)  ##最后调用自身完成递归，防止多弹框同时出现造成定位失败
+
+            print()
