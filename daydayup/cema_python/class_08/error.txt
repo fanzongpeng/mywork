@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "E:/VIP/code/cema_python/class_08/class_08_1.py", line 171, in <module>
+    print(1/0)
+ZeroDivisionError: division by zero
