@@ -1,3 +1,4 @@
+import os
 import time
 from threading import Thread
 
@@ -54,31 +55,32 @@ class TestDemo(Commont):
             else:
                 print("UNKNOW COMMAND %s" % step)
 
-    def test1(self,host,browser):
+    def test1(self, host, browser):
 
-            self.driver = webdriver.Remote(
-                command_executor=host,
-                # desired_capabilities=DesiredCapabilities.,
-                desired_capabilities={'platform': 'ANY', 'browserName': browser, 'version': '',
-                                      'javascriptEnabled': True}
-            )
-            self.driver.implicitly_wait(5)
-            self.driver.maximize_window()
-            self.driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx')
-            wait_click(self.driver, By.LINK_TEXT, '通讯录')
-            click_by_js(self.driver, By.LINK_TEXT, '通讯录')
-            # wait_click(self.driver, By.CSS_SELECTOR, '.js_has_member .ww_operationBar .js_add_member')
-            # click_by_js(self.driver, By.CSS_SELECTOR, '.js_has_member .ww_operationBar .js_add_member')
-            # find(self.driver, By.ID, 'username').send_keys('3463tb4g')
-            #
-            # self.driver.find_element(By.ID, 'memberAdd_acctid').send_keys('190823nhb')
-            # self.driver.find_element(By.ID, 'memberAdd_mail').send_keys('98765@qq.com')
-            # click_by_js(self.driver, By.CSS_SELECTOR, '.js_member_editor_form > div:nth-child(3)>.js_btn_save')
-            # ## self.driver.find_element(By.CSS_SELECTOR, '.js_member_editor_form > div:nth-child(3)>.js_btn_save').click()
-            #
-            # time.sleep(5)
-            self.driver.quit()
-##多线程
+        self.driver = webdriver.Remote(
+            command_executor=host,
+            # desired_capabilities=DesiredCapabilities.,
+            desired_capabilities={'platform': 'ANY', 'browserName': browser, 'version': '',
+                                  'javascriptEnabled': True}
+        )
+        self.driver.implicitly_wait(5)
+        self.driver.maximize_window()
+        self.driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx')
+        wait_click(self.driver, By.LINK_TEXT, '通讯录')
+        click_by_js(self.driver, By.LINK_TEXT, '通讯录')
+        # wait_click(self.driver, By.CSS_SELECTOR, '.js_has_member .ww_operationBar .js_add_member')
+        # click_by_js(self.driver, By.CSS_SELECTOR, '.js_has_member .ww_operationBar .js_add_member')
+        # find(self.driver, By.ID, 'username').send_keys('3463tb4g')
+        #
+        # self.driver.find_element(By.ID, 'memberAdd_acctid').send_keys('190823nhb')
+        # self.driver.find_element(By.ID, 'memberAdd_mail').send_keys('98765@qq.com')
+        # click_by_js(self.driver, By.CSS_SELECTOR, '.js_member_editor_form > div:nth-child(3)>.js_btn_save')
+        # ## self.driver.find_element(By.CSS_SELECTOR, '.js_member_editor_form > div:nth-child(3)>.js_btn_save').click()
+        #
+        # time.sleep(5)
+        self.driver.quit()
+
+    ##多线程
     def test2(self):
         nodes = {"http://127.0.0.1:5555/wd/hub": 'safari',
                  "http://127.0.0.1:5556/wd/hub": 'chrome'
@@ -160,6 +162,7 @@ class TestDemo(Commont):
         #                               'version': '',
         #                               'javascriptEnabled': True
         #                               })
+
     def test4(self):
         self.driver = webdriver.Remote(
             command_executor="http://127.0.0.1:5555/wd/hub",
@@ -170,12 +173,21 @@ class TestDemo(Commont):
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
         self.driver.get('https://www.baidu.com')
-        handle1=self.get_handle()
-        self.find(By.LINK_TEXT,'新闻').click()
+        handle1 = self.get_handle()
+        self.find(By.LINK_TEXT, '新闻').click()
         self.switch_window(handle1)
         self.driver.implicitly_wait(5)
-        a=self.find_scro(By.XPATH,'//*[@id="footerwrapper"]/div[1]/div/div[1]/div[1]/h4').text
+        a = self.find_scro(By.XPATH, '//*[@id="footerwrapper"]/div[1]/div/div[1]/div[1]/h4').text
         print(a)
         time.sleep(5)
         self.driver.quit()
 
+    def test_path(self):
+        b = self.file_path('data/com.yaml')
+        # a=os.path.dirname(os.path.realpath(__file__))
+        # b=os.path.join(a,'data/com.yaml')
+        self.read_yaml(b)
+
+    def test_excel(self):
+        b = self.file_path('data/cases.xlsx')
+        self.read_excel(b, '用例')
