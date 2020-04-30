@@ -1,6 +1,6 @@
 import requests
 
-from weixin.pytest_requests.utils import parse_content
+from apiwork.weixin.utils import parse_content
 
 
 class TestCase(object):

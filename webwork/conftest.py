@@ -7,8 +7,12 @@ from selenium import webdriver
 
 @pytest.fixture(scope="session")
 def driver():
-    driver = webdriver.Chrome(
-        executable_path='/usr/local/bin/chromdriver')
+    driver = webdriver.Remote(
+            command_executor='http://localhost:4444/wd/hub',
+            # desired_capabilities=DesiredCapabilities.,
+            desired_capabilities={'platform': 'ANY', 'browserName': 'chrome', 'version': '',
+                                  'javascriptEnabled': True}
+        )
     driver.implicitly_wait(5)
     driver.maximize_window()
     return driver

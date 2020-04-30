@@ -10,7 +10,6 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from hamcrest import *
 
-from page.search_page import SearchPage
 
 
 class TestDemo:

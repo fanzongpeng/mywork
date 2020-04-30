@@ -23,10 +23,10 @@ print(set(my_dict))
 # 字典转成列表，key,value可以单转
 print(list(my_dict.values()))
 print(list(my_dict))
-my_tuple1 = ('one', 1), ('two', 2), ('three', 3)
-my_list_tuple = [('one', 1), ('two', 2), ('three', 3)]
-# print(my_tuple1)
-print(type(my_list_tuple))
-print(dict(my_list_tuple))
+# my_tuple1 = ('one', 1), ('two', 2), ('three', 3)
+# my_list_tuple = [('one', 1), ('two', 2), ('three', 3)]
+# # print(my_tuple1)
+# print(type(my_list_tuple))
+# print(dict(my_list_tuple))
 
 

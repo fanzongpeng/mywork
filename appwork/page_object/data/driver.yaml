@@ -6,7 +6,7 @@ install_app:
   caps:
     android:
       platformName: android
-      deviceName: hogwarts
+      deviceName: offline
       appPackage: com.xueqiu.android
       appActivity: .view.WelcomeActivityAlias
       autoGrantPermissions: true

@@ -7,6 +7,7 @@ import xlrd as xlrd
 import xlwt as xlwt
 import yaml
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -88,7 +89,26 @@ class Commont():
         # Store the alert text in a variable
         text = alert.text
 
-        # Press the Cancel button
+        # Press the Cancel buttton
+
+    ##鼠标点击右键
+    def context_click(self, element):
+        ActionChains(self.driver).context_click(element).perform()
+        return self
+
+    ##鼠标悬停
+    def move_to_element(self, element):
+        ActionChains(self.driver).move_to_element(element).perform()
+        return self
+
+    ##双击鼠标
+    def double_click(self, element):
+        ActionChains(self.driver).double_click(element).perform()
+
+    ##鼠标拖动
+    def drag_and_drop(self, element1, element2):
+        ActionChains(self.driver).drag_and_drop(element1, element2).perform()
+        return self
 
     ##页面加载策略    alert.dismiss()
     def jiazai(self):

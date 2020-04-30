@@ -1,8 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
-from page_object.page.BasePage import BasePage
 from selenium.webdriver.support import expected_conditions
+
+from appwork.Demo.page.base_page import BasePage
+
 
 class LoginPage(BasePage):
     _close_locator=(By.ID, "iv_close")
@@ -32,13 +34,13 @@ class LoginPage(BasePage):
         self.loadSteps("../data/LoginPage.yaml", "loginByPassword", var1=account, var2=password)
         return self
     def loginSuccessByPassword(self, account, password):
-        from page_object.page.MainPage import MainPage
+        from appwork.page_object.page.MainPage import MainPage
         return MainPage()
 
     def back(self):
         self.find(self._back_locator).click()
         #WebDriverWait(self.driver, 2).until(expected_conditions.presence_of_element_located(self._close_locator))
-        from page_object.page.ProfilePage import ProfilePage
+        from appwork.page_object.page.ProfilePage import ProfilePage
         return ProfilePage()
 
     def getErrorMsg(self):

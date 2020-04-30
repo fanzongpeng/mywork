@@ -6,7 +6,7 @@ for letter in 'Python':     # 第一个实例
 
 
 a = 'f'
-b = ['a', 'b', 'c', 'd']
+b = ['a','b','f', 'c', 'd']
 for my in b:
     if a == my:
         print("找到！")

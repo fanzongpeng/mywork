@@ -7,7 +7,7 @@ from selenium import webdriver
 
 def getcookies():
     driver = webdriver.Chrome(
-        executable_path='/usr/local/bin/chromdriver')
+        executable_path='/usr/local/bin/chromedriver')
     driver.implicitly_wait(5)
     driver.maximize_window()
     driver.get('https://work.weixin.qq.com/wework_admin/loginpage_wx')

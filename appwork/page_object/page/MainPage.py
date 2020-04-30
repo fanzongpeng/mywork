@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 
-from page_object.page.BasePage import BasePage
-from page_object.page.ProfilePage import ProfilePage
-from page_object.page.SearchPage import SearchPage
-from page_object.page.SelectedPage import SelectedPage
+from appwork.Demo.page.base_page import BasePage
+from appwork.Demo.page.search_page import SearchPage
+from appwork.page_object.page.ProfilePage import ProfilePage
+from appwork.page_object.page.SelectedPage import SelectedPage
 
 
 class MainPage(BasePage):
@@ -29,3 +29,4 @@ class MainPage(BasePage):
         #self.find(MainPage._profile_button).click()
         self.loadSteps("../data/MainPage.yaml", "gotoProfile")
         return ProfilePage()
+
